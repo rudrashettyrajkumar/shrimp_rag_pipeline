@@ -1,0 +1,32 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+logs/*.log
+
+# Data
+data/raw/*.json
+data/raw/*.csv
+data/vectorstore/
+
+# Temp files
+*.tmp
+.DS_Store

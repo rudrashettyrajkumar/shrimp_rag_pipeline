@@ -1,0 +1,56 @@
+# RAG Pipeline Configuration Settings
+# This file contains all configuration parameters for the pipeline
+
+# OpenAI API Configuration
+openai:
+  api_key: ${OPENAI_API_KEY}  # Set via environment variable
+  model: "gpt-3.5-turbo"
+  temperature: 0.7
+  max_tokens: 1500
+  top_p: 0.95
+
+# Embeddings Configuration
+embeddings:
+  model_name: "all-MiniLM-L6-v2"
+  model_type: "sentence-transformers"
+  embedding_dimension: 384
+  batch_size: 32
+
+# Vector Store Configuration
+vectorstore:
+  type: "chromadb"
+  persist_directory: "./data/vectorstore"
+  collection_name: "shrimp_pond_rag"
+  chunk_size: 500
+  chunk_overlap: 100
+
+# Retrieval Configuration
+retrieval:
+  top_k: 5
+  similarity_threshold: 0.3
+  search_type: "similarity"  # Options: similarity, mmr, similarity_score_threshold
+
+# Data Ingestion Configuration
+ingestion:
+  input_file_path: "./data/raw/pond_data.json"
+  batch_size: 100
+  chunk_size: 500
+  chunk_overlap: 100
+  separators:
+    - "\n\n"
+    - "\n"
+    - " "
+    - ""
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  log_file: "./logs/pipeline.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Application Configuration
+app:
+  debug: false
+  environment: "production"  # Options: development, production
+  max_retries: 3
+  retry_delay: 1

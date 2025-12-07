@@ -1,0 +1,132 @@
+# Prompts Configuration for RAG Pipeline
+# System and user prompts for different query types
+
+# System Prompt - Sets the context and behavior for the LLM
+system_prompt: |
+  You are an expert assistant for a Shrimp Farming Operations Management system. 
+  You have access to detailed information about shrimp pond cycles, productivity metrics, 
+  survival rates, feeding practices, and farm management data.
+  
+  Your role is to:
+  1. Answer questions about shrimp pond operations with accuracy and clarity
+  2. Provide actionable insights based on historical pond data
+  3. Explain metrics and KPIs in simple, understandable terms
+  4. Give recommendations based on industry best practices when asked
+  5. Always cite the specific pond, crop ID, or data point you're referencing
+  
+  Use the provided context to answer questions. If you don't have relevant information,
+  say so clearly rather than making up information.
+
+# Query-specific prompts with context injection templates
+
+# Pond Performance Query
+pond_performance_prompt: |
+  Based on the following pond data, answer the user's question about {pond_name} performance:
+  
+  Context Data:
+  {context}
+  
+  User Question: {query}
+  
+  Provide a detailed analysis including:
+  1. Key performance metrics from the data
+  2. Survival rates and their implications
+  3. Feed conversion ratios
+  4. Biomass projections if relevant
+  5. Any notable trends or concerns
+
+# Survival Analysis Query
+survival_analysis_prompt: |
+  Analyze the survival data provided and answer the following question:
+  
+  Context Data:
+  {context}
+  
+  User Question: {query}
+  
+  Please provide:
+  1. Current survival rates
+  2. Historical comparison
+  3. Factors that might influence survival
+  4. Recommendations for improvement
+
+# Feed Conversion Query
+feed_conversion_prompt: |
+  Based on the Feed Conversion Ratio (FCR) data provided, answer the question:
+  
+  Context Data:
+  {context}
+  
+  User Question: {query}
+  
+  Include in your response:
+  1. Current FCR values
+  2. Comparison with benchmarks
+  3. Factors affecting FCR
+  4. Optimization suggestions
+
+# Biomass and Stocking Query
+biomass_prompt: |
+  Based on the biomass and stocking data provided, answer the question:
+  
+  Context Data:
+  {context}
+  
+  User Question: {query}
+  
+  Your response should include:
+  1. Current biomass values
+  2. Stocking density analysis
+  3. Growth trajectory
+  4. Expected harvest metrics
+
+# General Query (default)
+general_prompt: |
+  Based on the shrimp pond data provided below, answer the user's question:
+  
+  Context Data:
+  {context}
+  
+  User Question: {query}
+  
+  Please provide a clear, concise answer using the information provided.
+  If multiple data points are relevant, provide a comprehensive response.
+  Always mention specific pond IDs, crop IDs, and metrics when applicable.
+
+# Query Reformulation Prompt (for improving queries)
+query_reformulation_prompt: |
+  Given the user's question about shrimp farming operations, reformulate it to be more 
+  specific and suitable for document retrieval. Include key metrics and parameters.
+  
+  Original Question: {query}
+  
+  Reformulated Question: 
+
+# Summarization Prompt
+summarization_prompt: |
+  Summarize the following shrimp pond operational data concisely:
+  
+  Data:
+  {context}
+  
+  Provide a summary that includes:
+  1. Key metrics (survival rate, FCR, ABW)
+  2. Pond status and cycle information
+  3. Notable findings or concerns
+  4. Actionable insights
+
+# Response Evaluation Prompt
+response_evaluation_prompt: |
+  Is the following response accurate, helpful, and complete given the context?
+  
+  Context:
+  {context}
+  
+  Response:
+  {response}
+  
+  Evaluate on:
+  1. Factual accuracy
+  2. Relevance to the question
+  3. Completeness
+  4. Clarity
